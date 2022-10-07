@@ -5,11 +5,7 @@ import styles from '../styles/Featured.module.css';
 function Featured() {
   const [index, setIndex] = useState(0);
 
-  const images = [
-    '/images/featured.png',
-    '/images/featured2.png',
-    '/images/featured3.png',
-  ];
+  const images = ['/images/featured.png', '/images/featured2.png', '/images/featured3.png'];
 
   const handleArrow = (direction) => {
     if (direction === 'l') {
@@ -22,25 +18,13 @@ function Featured() {
 
   return (
     <div className={styles.container}>
-      <div
-        className={styles.arrowContainer}
-        style={{ left: '0' }}
-        onClick={() => handleArrow('l')}
-      >
-        <Image
-          src='/images/arrowl.png'
-          alt=''
-          layout='fill'
-          objectFit='contain'
-        />
+      <div className={styles.arrowContainer} style={{ left: '0' }} onClick={() => handleArrow('l')}>
+        <Image src="/images/arrowl.png" alt="" layout="fill" objectFit="contain" />
       </div>
-      <div
-        className={styles.wrapper}
-        style={{ transform: `translateX(${-100 * index}vw)` }}
-      >
+      <div className={styles.wrapper} style={{ transform: `translateX(${-100 * index}vw)` }}>
         {images.map((image, index) => (
           <div className={styles.imgContainer} key={index}>
-            <Image src={image} alt='' layout='fill' />
+            <Image src={image} alt="" layout="fill" />
           </div>
         ))}
       </div>
@@ -49,12 +33,7 @@ function Featured() {
         style={{ right: '0' }}
         onClick={() => handleArrow('r')}
       >
-        <Image
-          src='/images/arrowr.png'
-          alt=''
-          layout='fill'
-          objectFit='contain'
-        />
+        <Image src="/images/arrowr.png" alt="" layout="fill" objectFit="contain" />
       </div>
     </div>
   );
