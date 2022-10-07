@@ -1,24 +1,20 @@
-import style from '../styles/ProductList.module.css';
+/* eslint-disable no-underscore-dangle */
+import styles from '../styles/ProductList.module.css';
 import ProductCard from './ProductCard';
 
-function ProductList() {
+function ProductList({ productList }) {
   return (
-    <div className={style.container}>
-      <h1 className={style.title}>THE BEST PIZZA IN TOWN</h1>
-      <p className={style.desc}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident optio pariatur recusandae
-        vitae est ea distinctio, rem soluta architecto blanditiis tempora velit, amet illo, deleniti
-        illum delectus deserunt adipisci ex?
+    <div className={styles.container}>
+      <h1 className={styles.title}>THE BEST PIZZA IN TOWN</h1>
+      <p className={styles.desc}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut blandit arcu in pretium
+        molestie. Interdum et malesuada fames acme. Lorem ipsum dolor sit amet, consectetur
+        adipiscing elit.
       </p>
-      <div className={style.wrapper}>
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+      <div className={styles.wrapper}>
+        {productList?.map((product) => (
+          <ProductCard key={product._id} product={product} />
+        ))}
       </div>
     </div>
   );
