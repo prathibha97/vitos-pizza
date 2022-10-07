@@ -1,21 +1,21 @@
-import Image from "next/image";
-import { useState } from "react";
-import styles from "../styles/Featured.module.css";
+import Image from 'next/image';
+import { useState } from 'react';
+import styles from '../styles/Featured.module.css';
 
-const Featured = () => {
+function Featured() {
   const [index, setIndex] = useState(0);
 
   const images = [
-    "/images/featured.png",
-    "/images/featured2.png",
-    "/images/featured3.png",
+    '/images/featured.png',
+    '/images/featured2.png',
+    '/images/featured3.png',
   ];
 
   const handleArrow = (direction) => {
-    if (direction === "l") {
+    if (direction === 'l') {
       setIndex(index !== 0 ? index - 1 : 2);
     }
-    if (direction === "r") {
+    if (direction === 'r') {
       setIndex(index !== 2 ? index + 1 : 0);
     }
   };
@@ -24,14 +24,14 @@ const Featured = () => {
     <div className={styles.container}>
       <div
         className={styles.arrowContainer}
-        style={{ left: "0" }}
-        onClick={() => handleArrow("l")}
+        style={{ left: '0' }}
+        onClick={() => handleArrow('l')}
       >
         <Image
-          src="/images/arrowl.png"
-          alt=""
-          layout="fill"
-          objectFit="contain"
+          src='/images/arrowl.png'
+          alt=''
+          layout='fill'
+          objectFit='contain'
         />
       </div>
       <div
@@ -40,24 +40,24 @@ const Featured = () => {
       >
         {images.map((image, index) => (
           <div className={styles.imgContainer} key={index}>
-            <Image src={image} alt="" layout="fill" />
+            <Image src={image} alt='' layout='fill' />
           </div>
         ))}
       </div>
       <div
         className={styles.arrowContainer}
-        style={{ right: "0" }}
-        onClick={() => handleArrow("r")}
+        style={{ right: '0' }}
+        onClick={() => handleArrow('r')}
       >
         <Image
-          src="/images/arrowr.png"
-          alt=""
-          layout="fill"
-          objectFit="contain"
+          src='/images/arrowr.png'
+          alt=''
+          layout='fill'
+          objectFit='contain'
         />
       </div>
     </div>
   );
-};
+}
 
 export default Featured;
