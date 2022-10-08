@@ -16,26 +16,32 @@ function Order({ order }) {
       <div className={styles.left}>
         <div className={styles.row}>
           <table className={styles.table}>
-            <tr className={styles.trTitle}>
-              <th>Order ID</th>
-              <th>Customer</th>
-              <th>Address</th>
-              <th>Total</th>
-            </tr>
-            <tr className={styles.tr}>
-              <td>
-                <span className={styles.id}>{_id}</span>
-              </td>
-              <td>
-                <span className={styles.name}>{customer}</span>
-              </td>
-              <td>
-                <span className={styles.address}>{address}</span>
-              </td>
-              <td>
-                <span className={styles.total}>${total}</span>
-              </td>
-            </tr>
+            <tbody>
+              <tr className={styles.trTitle}>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Address</th>
+                <th>Total</th>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr className={styles.tr}>
+                <td>
+                  <span className={styles.id}>{_id}</span>
+                </td>
+                <td>
+                  <span className={styles.name}>{customer}</span>
+                </td>
+                <td>
+                  <span className={styles.address}>{address}</span>
+                </td>
+                <td>
+                  <span className={styles.total}>
+                    ${total}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
         <div className={styles.row}>
@@ -98,7 +104,7 @@ function Order({ order }) {
           <h2 className={styles.title}>CART TOTAL</h2>
           <div className={styles.totalText}>
             <b className={styles.totalTextTitle}>Subtotal:</b>
-            ${total}
+${total}
           </div>
           <div className={styles.totalText}>
             <b className={styles.totalTextTitle}>Discount:</b>
@@ -106,7 +112,7 @@ function Order({ order }) {
           </div>
           <div className={styles.totalText}>
             <b className={styles.totalTextTitle}>Total:</b>
-            ${total}
+${total}
           </div>
           <button type="button" disabled className={styles.button}>
             PAID
