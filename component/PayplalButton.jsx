@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable indent */
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-underscore-dangle */
 import { useEffect } from 'react';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
@@ -18,7 +21,7 @@ function ButtonWrapper({ currency, showSpinner }) {
       res.status === 201 && router.push(`/orders/${res.data._id}`);
       dispatch(reset());
     } catch (err) {
-      console.log(err);
+      throw new Error(err);
     }
   };
 
@@ -47,20 +50,20 @@ function ButtonWrapper({ currency, showSpinner }) {
         forceReRender={[amount, currency, style]}
         fundingSource={undefined}
         createOrder={(data, actions) => actions.order
-            .create({
-              purchase_units: [{ amount: { currency_code: currency, value: amount } }],
-            })
-            .then((orderId) => orderId)}
+          .create({
+            purchase_units: [{ amount: { currency_code: currency, value: amount } }],
+          })
+          .then((orderId) => orderId)}
         onApprove={(data, actions) => actions.order.capture().then((details) => {
-            // Your code here after capture the order
-            const { shipping } = details.purchase_units[0];
-            createOrder({
-              customer: shipping.name.full_name,
-              address: shipping.address.address_line_1,
-              total,
-              method: 1,
-            });
-          })}
+          // Your code here after capture the order
+          const { shipping } = details.purchase_units[0];
+          createOrder({
+            customer: shipping.name.full_name,
+            address: shipping.address.address_line_1,
+            total,
+            method: 1,
+          });
+        })}
       />
     </>
   );

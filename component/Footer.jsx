@@ -5,13 +5,11 @@ function Footer() {
   return (
     <div className={styles.container}>
       <div className={styles.item}>
-        <Image src='/images/bg.png' alt='' layout='fill' objectFit='cover' />
+        <Image src="/images/bg.png" alt="" layout="fill" objectFit="cover" />
       </div>
       <div className={styles.item}>
         <div className={styles.card}>
-          <h2 className={styles.motto}>
-            OH YES, WE DID. VITOS PIZZA WELL BAKED SLICE OF PIZZA
-          </h2>
+          <h2 className={styles.motto}>OH YES, WE DID. VITOS PIZZA WELL BAKED SLICE OF PIZZA</h2>
         </div>
         <div className={styles.card}>
           <h1 className={styles.title}>FIND OUR RESTAURANTS</h1>

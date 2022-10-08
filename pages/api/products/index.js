@@ -1,7 +1,8 @@
+/* eslint-disable consistent-return */
 import dbConnect from '../../../lib/mongo';
 import Product from '../../../models/Product';
 
-export default async function handler(req, res) {
+const handler = async (req, res) => {
   const { method, cookies } = req;
   const { token } = cookies;
   await dbConnect();
@@ -24,4 +25,6 @@ export default async function handler(req, res) {
       res.status(500).json(err);
     }
   }
-}
+};
+
+export default handler;

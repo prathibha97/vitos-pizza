@@ -1,3 +1,6 @@
+/* eslint-disable object-curly-newline */
+/* eslint-disable consistent-return */
+/* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable no-underscore-dangle */
 import axios from 'axios';
 import Image from 'next/image';
@@ -36,9 +39,7 @@ function Order({ order }) {
                   <span className={styles.address}>{address}</span>
                 </td>
                 <td>
-                  <span className={styles.total}>
-                    ${total}
-                  </span>
+                  <span className={styles.total}>${total}</span>
                 </td>
               </tr>
             </tbody>
@@ -103,16 +104,14 @@ function Order({ order }) {
         <div className={styles.wrapper}>
           <h2 className={styles.title}>CART TOTAL</h2>
           <div className={styles.totalText}>
-            <b className={styles.totalTextTitle}>Subtotal:</b>
-${total}
+            <b className={styles.totalTextTitle}>Subtotal:</b>${total}
           </div>
           <div className={styles.totalText}>
             <b className={styles.totalTextTitle}>Discount:</b>
             $0.00
           </div>
           <div className={styles.totalText}>
-            <b className={styles.totalTextTitle}>Total:</b>
-${total}
+            <b className={styles.totalTextTitle}>Total:</b>${total}
           </div>
           <button type="button" disabled className={styles.button}>
             PAID

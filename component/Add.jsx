@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 import axios from 'axios';
 import styles from '../styles/Add.module.css';
 
@@ -33,7 +32,8 @@ function Add({ setClose }) {
     try {
       const uploadRes = await axios.post(
         'https://api.cloudinary.com/v1_1/prathibha97/image/upload',
-        data
+        // eslint-disable-next-line prettier/prettier
+        data,
       );
       const { url } = uploadRes.data;
       const newProduct = {
@@ -46,7 +46,7 @@ function Add({ setClose }) {
       await axios.post('http://localhost:3000/api/products', newProduct);
       setClose(true);
     } catch (err) {
-      console.log(err);
+      throw new Error(err);
     }
   };
   return (

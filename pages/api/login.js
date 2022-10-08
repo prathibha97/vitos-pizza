@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import cookie from 'cookie';
 
 const handler = (req, res) => {
@@ -11,7 +12,7 @@ const handler = (req, res) => {
           maxAge: 60 * 60,
           sameSite: 'strict',
           path: '/',
-        })
+        }),
       );
       res.status(200).json('Successfull');
     } else {

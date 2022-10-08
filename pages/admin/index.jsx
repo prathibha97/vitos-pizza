@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-shadow */
 /* eslint-disable no-underscore-dangle */
 import axios from 'axios';
 import Image from 'next/image';
@@ -14,7 +16,7 @@ function Index({ products, orders }) {
       await axios.delete(`http://localhost:3000/api/products/${id}`);
       setProductList(productList.filter((product) => product._id !== id));
     } catch (err) {
-      console.log(err);
+      throw new Error(err);
     }
   };
 
@@ -27,7 +29,7 @@ function Index({ products, orders }) {
       });
       setOrderList([res.data, ...orderList.filter((order) => order._id !== id)]);
     } catch (err) {
-      console.log(err);
+      throw new Error(err);
     }
   };
 
@@ -57,8 +59,8 @@ function Index({ products, orders }) {
                 </td>
                 <td>{product.title}</td>
                 <td>
-$
-{product.prices[0]}
+                  $
+                  {product.prices[0]}
                 </td>
                 <td>
                   <button type="button" className={styles.button}>
@@ -98,7 +100,10 @@ $
                   ...
                 </td>
                 <td>{order.customer}</td>
-                <td>${order.total}</td>
+                <td>
+                  $
+                  {order.total}
+                </td>
                 <td>{order.method === 0 ? <span>Cash</span> : <span>Paid</span>}</td>
                 <td>{status[order.status]}</td>
                 <td>
