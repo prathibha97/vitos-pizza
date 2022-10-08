@@ -2,6 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  images: {
+    domains: ['res.cloudinary.com'],
+  },
 
   webpack: (config) => {
     // this will override the experiments
