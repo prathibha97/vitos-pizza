@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable no-underscore-dangle */
 import Image from 'next/image';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { useState } from 'react';
 import ButtonWrapper from '../component/PayplalButton';
@@ -9,7 +9,6 @@ import styles from '../styles/Cart.module.css';
 
 function Cart() {
   const currency = 'USD';
-  const dispatch = useDispatch();
   const { products, total } = useSelector((state) => state.cart);
   const [open, setOpen] = useState(false);
 

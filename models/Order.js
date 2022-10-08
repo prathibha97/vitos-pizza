@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const orderSchema = new mongoose.Schema(
+const OrderSchema = new mongoose.Schema(
   {
     customer: {
       type: String,
@@ -25,8 +25,7 @@ const orderSchema = new mongoose.Schema(
       required: true,
     },
   },
-  // eslint-disable-next-line comma-dangle
-  { timestamps: true }
+  { timestamps: true },
 );
 
-export default mongoose.models.Order || mongoose.model('Order', orderSchema);
+export default mongoose.models.Order || mongoose.model('Order', OrderSchema);
