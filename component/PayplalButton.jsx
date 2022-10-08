@@ -1,12 +1,26 @@
 /* eslint-disable no-underscore-dangle */
 import { useEffect } from 'react';
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
-import { useSelector } from 'react-redux';
-import createOrder from '../lib/createOrder';
+import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import { reset } from '../redux/cartSlice';
 
 function ButtonWrapper({ currency, showSpinner }) {
   // This values are the props in the UI
   const { total } = useSelector((state) => state.cart);
+
+  const createOrder = async (data) => {
+    const dispatch = useDispatch();
+    const router = useRouter();
+    try {
+      const res = await axios.post('http://localhost:3000/api/orders', data);
+      res.status === 201 && router.push(`/orders/${res.data._id}`);
+      dispatch(reset());
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const amount = total;
   const style = { layout: 'vertical' };
@@ -32,25 +46,21 @@ function ButtonWrapper({ currency, showSpinner }) {
         disabled={false}
         forceReRender={[amount, currency, style]}
         fundingSource={undefined}
-        createOrder={(data, actions) =>
-          actions.order
-          .create({
-            purchase_units: [{ amount: { currency_code: currency, value: amount } }],
-          })
-          .then((orderId) => orderId)
-        }
-        onApprove={(data, actions) =>
-          actions.order.capture().then((details) => {
-          // Your code here after capture the order
-          const { shipping } = details.purchase_units[0];
-          createOrder({
-            customer: shipping.name.full_name,
-            address: shipping.address.address_line_1,
-            total,
-            method: 1,
-          });
-        })
-        }
+        createOrder={(data, actions) => actions.order
+            .create({
+              purchase_units: [{ amount: { currency_code: currency, value: amount } }],
+            })
+            .then((orderId) => orderId)}
+        onApprove={(data, actions) => actions.order.capture().then((details) => {
+            // Your code here after capture the order
+            const { shipping } = details.purchase_units[0];
+            createOrder({
+              customer: shipping.name.full_name,
+              address: shipping.address.address_line_1,
+              total,
+              method: 1,
+            });
+          })}
       />
     </>
   );

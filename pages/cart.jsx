@@ -1,16 +1,33 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable no-underscore-dangle */
 import Image from 'next/image';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 import ButtonWrapper from '../component/PayplalButton';
+import OrderDetail from '../component/OrderDetail';
 import styles from '../styles/Cart.module.css';
+import { reset } from '../redux/cartSlice';
 
 function Cart() {
   const currency = 'USD';
+  const dispatch = useDispatch();
+  const router = useRouter();
   const { products, total } = useSelector((state) => state.cart);
   const [open, setOpen] = useState(false);
+  const [cash, setCash] = useState(false);
+
+  const createOrder = async (data) => {
+    try {
+      const res = await axios.post('http://localhost:3000/api/orders', data);
+      res.status === 201 && router.push(`/orders/${res.data._id}`);
+      dispatch(reset());
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -73,7 +90,7 @@ function Cart() {
           </div>
           {open ? (
             <div className={styles.paymentMethods}>
-              <button type="button" className={styles.payButton}>
+              <button type="button" className={styles.payButton} onClick={() => setCash(true)}>
                 CASH ON DELIVER
               </button>
               <PayPalScriptProvider
@@ -95,6 +112,7 @@ function Cart() {
           )}
         </div>
       </div>
+      {cash && <OrderDetail total={total} createOrder={createOrder} />}
     </div>
   );
 }
