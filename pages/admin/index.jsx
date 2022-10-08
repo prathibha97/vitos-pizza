@@ -56,7 +56,10 @@ function Index({ products, orders }) {
                   ...
                 </td>
                 <td>{product.title}</td>
-                <td>${product.prices[0]}</td>
+                <td>
+$
+{product.prices[0]}
+                </td>
                 <td>
                   <button type="button" className={styles.button}>
                     Edit
@@ -95,10 +98,7 @@ function Index({ products, orders }) {
                   ...
                 </td>
                 <td>{order.customer}</td>
-                <td>
-                  $
-{order.total}
-                </td>
+                <td>${order.total}</td>
                 <td>{order.method === 0 ? <span>Cash</span> : <span>Paid</span>}</td>
                 <td>{status[order.status]}</td>
                 <td>
@@ -115,7 +115,16 @@ function Index({ products, orders }) {
   );
 }
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (ctx) => {
+  const myCookie = ctx.req?.cookies || '';
+  if (myCookie.token !== process.env.TOKEN) {
+    return {
+      redirect: {
+        destination: '/admin/login',
+        permanent: false,
+      },
+    };
+  }
   const productRes = await axios.get('http://localhost:3000/api/products');
   const orderRes = await axios.get('http://localhost:3000/api/orders');
 
